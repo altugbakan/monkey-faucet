@@ -1,10 +1,18 @@
-<script lang='ts'>
-	// The ordering of these imports is critical to your app working properly
-	import '@skeletonlabs/skeleton/themes/theme-gold-nouveau.css';
-	// If you have source.organizeImports set to true in VSCode, then it will auto change this ordering
+<script lang="ts">
+	import { AppShell, AppBar, LightSwitch } from '@skeletonlabs/skeleton';
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
-	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
 </script>
 
-<slot />
+<AppShell>
+	<svelte:fragment slot="header">
+		<AppBar>
+			<svelte:fragment slot="lead">
+				<i class="fa-solid fa-crown text-primary-700 dark:text-primary-500" />
+			</svelte:fragment>
+			<span class="text-2xl font-bold">MonKey Faucet</span>
+			<svelte:fragment slot="trail"><LightSwitch /></svelte:fragment>
+		</AppBar>
+	</svelte:fragment>
+	<slot />
+</AppShell>

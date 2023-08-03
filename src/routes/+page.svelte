@@ -1,13 +1,14 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
-
-<div class="container h-full mx-auto flex justify-center items-center">
-	<div class="space-y-5">
-		<h1 class="h1">Let's get cracking bones!</h1>
-		<p>Start by exploring:</p>
-		<ul>
-			<li><code class="code">/src/routes/+layout.svelte</code> - barebones layout, the CSS import order is critical!</li>
-			<li><code class="code">/src/app.postcss</code> - minimal css to make the page full screen, may not be relevant for your project</li>
-			<li><code class="code">/src/routes/+page.svelte</code> - this page, you can replace the contents</li>
-		</ul>
-	</div>
+<div class="mx-auto max-w-md space-y-4 text-center">
+	<img
+		src="https://monkey.banano.cc/api/v1/monkey/ban_31jkmeb9qgmgwwet1ru7heut6biz6qejkcp3gn38i73fp8ake4b9kd5ezbcf"
+		alt="Banano Monkey"
+		class="max-w-md aspect-square" />
+	<h1 class="h1">
+		<span
+			class="dark:bg-gradient-to-br dark:from-primary-500 dark:to-secondary-300 dark:bg-clip-text dark:text-transparent dark:box-decoration-clone">
+			Welcome to MonKey Faucet!
+		</span>
+	</h1>
+	<label for="address" class="label text-left ml-2">Enter your Banano address to continue</label>
+	<input id="address" class="input pl-2 !mt-1" placeholder="ban_1234...90" />
 </div>
