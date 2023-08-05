@@ -8,7 +8,9 @@
 	<svelte:fragment slot="header">
 		<AppBar>
 			<svelte:fragment slot="lead">
-				<i class="fa-solid fa-crown text-primary-700 dark:text-primary-500" />
+				<a href="/" class="transition duration-300 hover:scale-125">
+					<i class="fa-solid fa-crown text-primary-700 dark:text-primary-500" />
+				</a>
 			</svelte:fragment>
 			<span class="text-2xl font-bold">MonKey Faucet</span>
 			<svelte:fragment slot="trail"><LightSwitch /></svelte:fragment>

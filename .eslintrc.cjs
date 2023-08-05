@@ -26,5 +26,9 @@ module.exports = {
 				parser: '@typescript-eslint/parser'
 			}
 		}
-	]
+	],
+	rules: {
+		'no-console': 'warn',
+		'no-unused-vars': 'error'
+	}
 };
