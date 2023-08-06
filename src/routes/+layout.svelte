@@ -4,6 +4,10 @@
 	import '../app.postcss';
 </script>
 
+<svelte:head>
+	<title>MonKey Faucet</title>
+</svelte:head>
+
 <AppShell>
 	<svelte:fragment slot="header">
 		<AppBar>
