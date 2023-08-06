@@ -1,10 +1,11 @@
 <script lang="ts">
-	import { DEFAULT_BUBBLE, FAUCET_ADDRESS } from '$lib/constants';
+	import { DEFAULT_BUBBLE } from '$lib/constants';
 	import Prompt from '$lib/components/chat/Prompt.svelte';
 	import Bubble, { type BubbleProps } from '$lib/components/chat/Bubble.svelte';
 	import type { FaucetDataResponse } from './+page.server';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { PUBLIC_FAUCET_ADDRESS } from '$env/static/public';
 
 	export let data: FaucetDataResponse;
 
@@ -33,7 +34,7 @@
 		const faucetMessage: BubbleProps = {
 			id: messageFeed.length + 1,
 			host: true,
-			address: FAUCET_ADDRESS,
+			address: PUBLIC_FAUCET_ADDRESS,
 			name: 'Faucet MonKey',
 			color: 'variant-soft-primary'
 		};

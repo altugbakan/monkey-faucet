@@ -3,7 +3,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import crown from '$lib/assets/crown.webp';
-	import { FAUCET_ADDRESS } from '$lib/constants';
+	import { PUBLIC_FAUCET_ADDRESS } from '$env/static/public';
 </script>
 
 <svelte:head>
@@ -37,7 +37,7 @@
 					<i class="fa-brands fa-github text-lg" />
 				</a>
 				<a
-					href="https://creeper.banano.cc/account/{FAUCET_ADDRESS}"
+					href="https://creeper.banano.cc/account/{PUBLIC_FAUCET_ADDRESS}"
 					target="_blank"
 					rel="noopener noreferrer"
 					class="transition duration-300 transform hover:scale-150">

@@ -1,12 +1,13 @@
 import { BANANO_SEED } from '$env/static/private';
 import bananojs from '@bananocoin/bananojs';
-import { FAUCET_ADDRESS, REPRESENTATIVE_ADDRESS, RPC_URL } from './constants';
+import { REPRESENTATIVE_ADDRESS, RPC_URL } from './constants';
+import { PUBLIC_FAUCET_ADDRESS } from '$env/static/public';
 
 bananojs.setBananodeApiUrl(RPC_URL);
 
 export async function getFaucetBalance() {
 	await receiveDeposits();
-	let balance = await bananojs.getAccountBalanceRaw(FAUCET_ADDRESS);
+	let balance = await bananojs.getAccountBalanceRaw(PUBLIC_FAUCET_ADDRESS);
 	let parts = bananojs.getBananoPartsFromRaw(balance);
 	return Number(parts.banano);
 }

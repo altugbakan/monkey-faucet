@@ -1,6 +1,6 @@
 <script lang="ts">
+	import { PUBLIC_FAUCET_ADDRESS } from '$env/static/public';
 	import qrCode from '$lib/assets/qrcode.svg';
-	import { FAUCET_ADDRESS } from '$lib/constants';
 
 	export let data;
 </script>
@@ -15,7 +15,7 @@
 	</section>
 	<section class="border-t border-surface-500/30 p-4 flex flex-col gap-4">
 		<img src={qrCode} alt="Donation QR Code" class="aspect-square w-40 mx-auto" />
-		<p class="text-xs break-all">{FAUCET_ADDRESS}</p>
+		<p class="text-xs break-all">{PUBLIC_FAUCET_ADDRESS}</p>
 		<h3 class="h3">
 			You can donate to the faucet using the QR code above to increase the rewards and keep it
 			running.

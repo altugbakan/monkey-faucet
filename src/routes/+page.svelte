@@ -1,6 +1,16 @@
+<script lang="ts" context="module">
+	declare global {
+		interface Window {
+			grecaptcha: any;
+		}
+	}
+</script>
+
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { goto } from '$app/navigation';
-	import { BANANO_REGEX, FAUCET_ADDRESS, MONKEY_API_URL } from '$lib/constants';
+	import { PUBLIC_FAUCET_ADDRESS, PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
+	import { BANANO_REGEX, MONKEY_API_URL } from '$lib/constants';
 
 	let value = '';
 	let isFocused = false;
@@ -17,7 +27,17 @@
 	}
 
 	function redirect() {
-		goto(`/faucet?address=${value}`);
+		if (!browser) {
+			return;
+		}
+
+		window.grecaptcha.ready(function () {
+			window.grecaptcha
+				.execute(PUBLIC_CAPTCHA_SITE_KEY, { action: 'submit' })
+				.then(function (token: string) {
+					goto(`/faucet?address=${value}&token=${token}`);
+				});
+		});
 	}
 
 	function onKeydown(event: KeyboardEvent): void {
@@ -28,24 +48,32 @@
 	}
 </script>
 
+<svelte:head>
+	<script
+		src="https://www.google.com/recaptcha/api.js?render={PUBLIC_CAPTCHA_SITE_KEY}"
+		async
+		defer></script>
+</svelte:head>
+
 <div class="mx-auto w-3/4 max-w-md space-y-4 text-center">
 	<section>
 		<img
-			src="{MONKEY_API_URL}{FAUCET_ADDRESS}"
+			src="{MONKEY_API_URL}{PUBLIC_FAUCET_ADDRESS}"
 			alt="Faucet MonKey"
-			class="max-w-sm mx-auto aspect-square" />
+			class="max-w-xs mx-auto aspect-square" />
 		<h1
 			class="text-3xl dark:bg-gradient-to-br dark:from-primary-500 dark:to-secondary-300 dark:bg-clip-text dark:text-transparent dark:box-decoration-clone">
 			Welcome to MonKey Faucet!
 		</h1>
 	</section>
 	<section class="border-t border-surface-500/30 p-4">
-		<label for="address" class="label text-left ml-2 mb-1 text-sm sm:text-lg"
-			>Enter your Banano address to continue</label>
+		<label for="address" class="label text-left ml-2 mb-1 text-sm sm:text-lg">
+			Enter your Banano address to continue
+		</label>
 		<div
-			class="input-group flex rounded-container-base invalid:input-error"
-			class:input-error={invalid}
-			class:input-success={!disabled}>
+			class="input-group flex rounded-container-base"
+			class:variant-soft-error={invalid}
+			class:variant-soft-success={!disabled}>
 			<input
 				bind:value
 				on:focus={onFocus}
@@ -60,6 +88,7 @@
 			</button>
 		</div>
 	</section>
+	<!-- prettier-ignore -->
 	<footer>
 		No Banano address? You can grab a wallet
 		<a
@@ -67,7 +96,6 @@
 			href="https://banano.cc/#wallets"
 			target="_blank"
 			rel="noopener">
-			here</a
-		>.
+			here</a>.
 	</footer>
 </div>
