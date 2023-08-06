@@ -11,17 +11,15 @@
 
 <script lang="ts">
 	import { MONKEY_API_URL } from '$lib/constants';
+	import Avatar from './Avatar.svelte';
 	import Loading from './Loading.svelte';
 
 	export let bubble: BubbleProps;
 </script>
 
 {#if bubble.host === true}
-	<div class="grid grid-cols-[auto_1fr] gap-2">
-		<img
-			src="{MONKEY_API_URL}{bubble.address}"
-			alt="You"
-			class="w-24 h-16 object-cover object-center rounded-lg" />
+	<div class="flex flex-row gap-2">
+		<Avatar address={bubble.address} host={true} />
 		<div class="card p-4 rounded-tl-none space-y-2 {bubble.color}">
 			<header class="flex justify-between items-center">
 				<p class="font-bold">{bubble.name}</p>
@@ -35,10 +33,7 @@
 	</div>
 {:else}
 	<div class="flex flex-row-reverse gap-2">
-		<img
-			src="{MONKEY_API_URL}{bubble.address}"
-			alt="You"
-			class="w-24 h-16 object-cover object-center rounded-lg" />
+		<Avatar address={bubble.address} host={false} />
 		<div class="card p-4 rounded-tr-none space-y-2 {bubble.color}">
 			<header class="flex flex-row-reverse justify-between items-center">
 				<p class="font-bold">{bubble.name}</p>

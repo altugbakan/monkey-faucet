@@ -31,7 +31,7 @@ export async function load({ url }: { url: URL }): Promise<FaucetDataResponse> {
 
 	const score: number = (await response.json()).score;
 
-	if (score < 0.7) {
+	if (!score || score < 0.7) {
 		throw error(400, 'Invalid captcha');
 	}
 
