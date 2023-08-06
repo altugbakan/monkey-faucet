@@ -13,7 +13,7 @@ export async function getFaucetBalance() {
 
 export async function getCurrentReward() {
 	const balance = await getFaucetBalance();
-	return Math.min(1, balance / 10);
+	return Math.min(5, balance / 10);
 }
 
 export async function sendBanano(address) {

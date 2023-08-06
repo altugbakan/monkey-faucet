@@ -1,4 +1,4 @@
-import { Configuration, OpenAIApi, type ChatCompletionRequestMessageFunctionCall } from 'openai';
+import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_API_KEY } from '$env/static/private';
 import type { Message } from './models/chat';
 import { FUNCTIONS } from './constants';
@@ -32,9 +32,9 @@ export async function getResponse(messages: Message[]): Promise<GptResponse> {
 		messages
 	});
 
-	const message = chatCompletion.data.choices[0].message!;
+	const message = chatCompletion.data.choices[0].message;
 
-	const functionCall = message.function_call;
+	const functionCall = message?.function_call;
 	let decision;
 
 	if (functionCall && functionCall.name === 'terminate' && functionCall.arguments) {
@@ -45,7 +45,7 @@ export async function getResponse(messages: Message[]): Promise<GptResponse> {
 		message: {
 			role: 'assistant',
 			content:
-				message.content ??
+				message?.content ??
 				(decision
 					? 'Thank you for being a good MonKey! I will send you some Bananos now.'
 					: 'Bad MonKeys get no Banano.')

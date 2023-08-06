@@ -11,7 +11,7 @@ export interface FaucetDataResponse {
 }
 
 export async function load({ url }: { url: URL }): Promise<FaucetDataResponse> {
-	let address = url.searchParams.get('address');
+	const address = url.searchParams.get('address');
 	if (!address || !BANANO_REGEX.test(address)) {
 		throw error(400, 'Invalid address');
 	}
@@ -27,7 +27,7 @@ export async function load({ url }: { url: URL }): Promise<FaucetDataResponse> {
 			.map((message: Message, index: number) => ({
 				id: index,
 				host: message.role === 'assistant' ? true : false,
-				address: message.role === 'assistant' ? FAUCET_ADDRESS : address!,
+				address: message.role === 'assistant' ? FAUCET_ADDRESS : address,
 				name: message.role === 'assistant' ? 'Faucet MonKey' : 'You',
 				message: message.content,
 				color: message.role === 'assistant' ? 'variant-soft-primary' : 'variant-soft-secondary'

@@ -3,6 +3,7 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	import '../app.postcss';
 	import crown from '$lib/assets/crown.webp';
+	import { FAUCET_ADDRESS } from '$lib/constants';
 </script>
 
 <svelte:head>
@@ -20,9 +21,29 @@
 						class="aspect-square w-8 text-primary-700 dark:text-primary-500" />
 				</a>
 			</svelte:fragment>
-			<span class="text-2xl font-bold">MonKey Faucet</span>
+			<span class="text-lg md:text-2xl font-bold">MonKey Faucet</span>
 			<svelte:fragment slot="trail"><LightSwitch /></svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
 	<slot />
+	<svelte:fragment slot="footer">
+		<section class="text-center text-sm border-t border-surface-500/30 p-2 flex">
+			<div class="mx-auto flex gap-x-4 justify-center">
+				<a
+					href="https://github.com/altugbakan/monkey-faucet"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="transition duration-300 transform hover:scale-150">
+					<i class="fa-brands fa-github text-lg" />
+				</a>
+				<a
+					href="https://creeper.banano.cc/account/{FAUCET_ADDRESS}"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="transition duration-300 transform hover:scale-150">
+					<i class="fa-solid fa-magnifying-glass text-lg" />
+				</a>
+			</div>
+		</section>
+	</svelte:fragment>
 </AppShell>

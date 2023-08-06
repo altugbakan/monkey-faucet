@@ -9,7 +9,7 @@
 	export let data: FaucetDataResponse;
 
 	let chat: HTMLElement;
-	let disabled: boolean = false;
+	let disabled = false;
 	let messageFeed: BubbleProps[] = data.bubbles ?? [DEFAULT_BUBBLE];
 
 	function scrollChatBottom(): void {
