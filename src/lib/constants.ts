@@ -1,6 +1,8 @@
 export const BANANO_REGEX = /^ban_[13]{1}[13456789abcdefghijkmnopqrstuwxyz]{59}$/;
 export const FAUCET_ADDRESS = 'ban_31jkmeb9qgmgwwet1ru7heut6biz6qejkcp3gn38i73fp8ake4b9kd5ezbcf';
 export const MONKEY_API_URL = 'https://monkey.banano.cc/api/v1/monkey/';
+export const REPRESENTATIVE_ADDRESS =
+	'ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo';
 export const RPC_URL = 'https://kaliumapi.appditto.com/api';
 export const INITIAL_MESSAGE =
 	"Oh, I see you're looking for some Bananos from the MonKey faucet! Well, I'll be more than happy to consider your request. But remember, I'm a cautious MonKey, so you'll need to convince me that you truly deserve these precious Bananos.";
