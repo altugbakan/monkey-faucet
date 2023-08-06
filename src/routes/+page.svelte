@@ -1,21 +1,30 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { BANANO_REGEX, FAUCET_ADDRESS, MONKEY_API_URL } from '$lib/constants';
 
 	let value: string = '';
 	let isFocused = false;
 
+	$: disabled = !BANANO_REGEX.test(value);
+	$: invalid = value.length > 0 && !isFocused && disabled;
+
 	function onFocus() {
 		isFocused = true;
 	}
+
 	function onBlur() {
 		isFocused = false;
 	}
 
-	$: disabled = !BANANO_REGEX.test(value);
-	$: invalid = value.length > 0 && !isFocused && disabled;
-
 	function redirect() {
-		location.href = `/faucet?address=${value}`;
+		goto(`/faucet?address=${value}`);
+	}
+
+	function onKeydown(event: KeyboardEvent): void {
+		if (event.key === 'Enter' && !disabled) {
+			event.preventDefault();
+			redirect();
+		}
 	}
 </script>
 
@@ -35,6 +44,7 @@
 				bind:value
 				on:focus={onFocus}
 				on:blur={onBlur}
+				on:keydown={onKeydown}
 				class="bg-transparent border-0 ring-0 outline-none px-2"
 				name="address"
 				id="address"

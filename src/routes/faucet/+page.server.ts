@@ -2,7 +2,7 @@ import { BANANO_REGEX, FAUCET_ADDRESS } from '$lib/constants';
 import { error, redirect } from '@sveltejs/kit';
 import db from '$lib/db';
 import type { Chat } from '$lib/models/chat';
-import type { BubbleProps } from '../../components/chat/Bubble.svelte';
+import type { BubbleProps } from '$lib/components/chat/Bubble.svelte';
 import type { Message } from '$lib/models/chat';
 
 export interface FaucetDataResponse {
@@ -10,7 +10,7 @@ export interface FaucetDataResponse {
 	bubbles?: BubbleProps[];
 }
 
-export async function load({ url }): Promise<FaucetDataResponse> {
+export async function load({ url }: { url: URL }): Promise<FaucetDataResponse> {
 	let address = url.searchParams.get('address');
 	if (!address || !BANANO_REGEX.test(address)) {
 		throw error(400, 'Invalid address');

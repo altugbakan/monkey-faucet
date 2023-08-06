@@ -1,5 +1,5 @@
-<script>
-	import Home from '../components/Home.svelte';
+<script lang="ts">
+	import Home from '$lib/components/Home.svelte';
 </script>
 
 <div class="m-auto h-full text-center flex flex-col align-middle justify-center gap-4">

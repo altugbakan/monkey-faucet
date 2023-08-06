@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { DEFAULT_BUBBLE, FAUCET_ADDRESS } from '$lib/constants';
-	import Prompt from '../../components/chat/Prompt.svelte';
-	import Bubble, { type BubbleProps } from '../../components/chat/Bubble.svelte';
+	import Prompt from '$lib/components/chat/Prompt.svelte';
+	import Bubble, { type BubbleProps } from '$lib/components/chat/Bubble.svelte';
 	import type { FaucetDataResponse } from './+page.server';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	export let data: FaucetDataResponse;
 
@@ -54,7 +55,18 @@
 				faucetMessage.message = res.message.content;
 				messageFeed = [...messageFeed];
 				scrollChatBottom();
-				disabled = false;
+
+				if (res.decision === true) {
+					setTimeout(() => {
+						goto('/faucet/success');
+					}, 2000);
+				} else if (res.decision === false) {
+					setTimeout(() => {
+						goto(`/faucet/failure`);
+					}, 2000);
+				} else {
+					disabled = false;
+				}
 			});
 	}
 

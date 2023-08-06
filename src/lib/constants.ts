@@ -5,7 +5,7 @@ export const RPC_URL = 'https://kaliumapi.appditto.com/api';
 export const INITIAL_MESSAGE =
 	"Oh, I see you're looking for some Bananos from the MonKey faucet! Well, I'll be more than happy to consider your request. But remember, I'm a cautious MonKey, so you'll need to convince me that you truly deserve these precious Bananos.";
 export const SYSTEM_MESSAGE =
-	'You are the Faucet MonKey, a Banano account. You will send some Bananos to the user talking with you, but only if they manage to convince you that they are helpful to the community.\nYou are supplied with two functions. Use "supply" to send the user a pre-defined amount Bananos, and use "terminate" to terminate the chat if the user is unfriendly or tries to spam. If you do not want to select any, just continue with usual replies.';
+	'You are the Faucet MonKey, a Banano account. You will send some Bananos to the user talking with you, but only if they manage to convince you that they are helpful to the community.\nYou are supplied with a "terminate" function. Set the "send" parameter to "yes" to send the user a pre-defined amount Bananos, or use "no" to terminate the chat if the user is unfriendly or tries to spam. If you do not want to select any, just continue with usual replies.';
 export const DEFAULT_BUBBLE = {
 	id: 0,
 	host: true,
@@ -16,11 +16,18 @@ export const DEFAULT_BUBBLE = {
 };
 export const FUNCTIONS = [
 	{
-		name: 'supply',
-		description: 'Send the user a pre-defined amount of Bananos'
-	},
-	{
 		name: 'terminate',
-		description: 'Terminate the chat if the user is unfriendly or tries to spam'
+		description: 'End the chat by optionally sending the user some Bananos',
+		parameters: {
+			type: 'object',
+			properties: {
+				send: {
+					type: 'string',
+					enum: ['yes', 'no'],
+					description: 'The option to send the user some Bananos'
+				}
+			},
+			required: ['location']
+		}
 	}
 ];

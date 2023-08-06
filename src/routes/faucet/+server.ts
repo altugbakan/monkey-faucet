@@ -59,16 +59,20 @@ export async function POST({ request }): Promise<Response> {
 
 	await chatCollection.updateOne(
 		{ address },
-		{ $set: { address, messages: messages, lastUpdated: new Date() } },
+		{
+			$set: {
+				address,
+				messages: messages,
+				lastUpdated: new Date(),
+				finished: response.decision === undefined ? false : true
+			}
+		},
 		{ upsert: true }
 	);
 
-	if (response.functionCall) {
-		if (response.functionCall.name === 'supply') {
-			sendBanano(address);
-		}
-		await chatCollection.updateOne({ address }, { $set: { finished: true } });
+	if (response.decision) {
+		await sendBanano(address);
 	}
 
-	return json({ message: messages.at(-1) }, { status: 200 });
+	return json({ message: messages.at(-1), decision: response.decision }, { status: 200 });
 }
