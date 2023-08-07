@@ -11,7 +11,6 @@
 	import { goto } from '$app/navigation';
 	import { PUBLIC_FAUCET_ADDRESS, PUBLIC_CAPTCHA_SITE_KEY } from '$env/static/public';
 	import { BANANO_REGEX, MONKEY_API_URL } from '$lib/constants';
-	import { onDestroy, onMount } from 'svelte';
 
 	let value = '';
 	let isFocused = false;
@@ -56,15 +55,15 @@
 		defer></script>
 </svelte:head>
 
-<div class="flex flex-col h-full">
-	<div class="mx-auto w-3/4 max-w-md space-y-4 justify-center text-center">
+<div class="flex flex-col h-full mb-2">
+	<div class="mx-auto w-5/6 max-w-md space-y-4 justify-center text-center">
 		<section>
 			<img
 				src="{MONKEY_API_URL}{PUBLIC_FAUCET_ADDRESS}"
 				alt="Faucet MonKey"
-				class="max-w-xs mx-auto aspect-square" />
+				class="max-w-xs w-3/4 mx-auto" />
 			<h1
-				class="text-3xl dark:bg-gradient-to-br dark:from-primary-500 dark:to-secondary-300 dark:bg-clip-text dark:text-transparent dark:box-decoration-clone">
+				class="text-2xl sm:text-3xl bg-gradient-to-br from-primary-700 to-secondary-600 dark:from-primary-500 dark:to-secondary-300 bg-clip-text text-transparent box-decoration-clone">
 				Welcome to MonKey Faucet!
 			</h1>
 		</section>
@@ -91,7 +90,7 @@
 			</div>
 		</section>
 		<!-- prettier-ignore -->
-		<span>
+		<span class="text-sm sm:text-md">
 			No Banano address? You can grab a wallet
 			<a
 				class="text-primary-700 dark:text-primary-500 hover:underline"

@@ -5,7 +5,8 @@
 	export let data;
 </script>
 
-<div class="h-full m-auto max-w-lg text-center flex flex-col align-middle justify-center gap-8">
+<div
+	class="h-full m-auto w-5/6 max-w-lg text-center flex flex-col align-middle justify-center gap-8">
 	<section class="mx-auto gap-4 max-w-lg">
 		<h1
 			class="h1 pb-2 bg-gradient-to-br from-primary-700 to-secondary-600 dark:from-primary-500 dark:to-secondary-600 bg-clip-text text-transparent">
