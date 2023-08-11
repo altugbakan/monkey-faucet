@@ -2,8 +2,8 @@
 
 <p align="center">
   <img src="https://monkey.banano.cc/api/v1/monkey/ban_31jkmeb9qgmgwwet1ru7heut6biz6qejkcp3gn38i73fp8ake4b9kd5ezbcf?format=png&size=225&background=false" width="225" alt="Faucet MonKey">
+  <div align="center">Banano faucet powered by AI</div>
 </p>
-Banano faucet powered by AI
 
 ## Usage
 
