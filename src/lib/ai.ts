@@ -1,11 +1,29 @@
 import { Configuration, OpenAIApi } from 'openai';
 import { OPENAI_API_KEY } from '$env/static/private';
 import type { Message } from './models/chat';
-import { FUNCTIONS } from './constants';
+
 interface GptResponse {
 	message: Message;
 	decision?: boolean;
 }
+
+const functions = [
+	{
+		name: 'terminate',
+		description: 'End the chat by optionally sending the user some Bananos',
+		parameters: {
+			type: 'object',
+			properties: {
+				send: {
+					type: 'string',
+					enum: ['yes', 'no'],
+					description: 'The option to send the user some Bananos'
+				}
+			},
+			required: ['location']
+		}
+	}
+];
 
 const configuration = new Configuration({
 	apiKey: OPENAI_API_KEY
@@ -28,7 +46,7 @@ export async function getResponse(messages: Message[]): Promise<GptResponse> {
 	messages = shortenMessages(messages);
 	const chatCompletion = await openai.createChatCompletion({
 		model: 'gpt-3.5-turbo-0613',
-		functions: FUNCTIONS,
+		functions,
 		messages
 	});
 

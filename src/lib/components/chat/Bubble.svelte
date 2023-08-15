@@ -10,7 +10,6 @@
 </script>
 
 <script lang="ts">
-	import { MONKEY_API_URL } from '$lib/constants';
 	import Avatar from './Avatar.svelte';
 	import Loading from './Loading.svelte';
 
