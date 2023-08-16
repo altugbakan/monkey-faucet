@@ -1,11 +1,10 @@
 import { BANANO_REGEX, CAPTCHA_VERIFY_URL } from '$lib/constants';
 import { error, redirect } from '@sveltejs/kit';
-import db from '$lib/db';
-import type { Chat } from '$lib/models/chat';
 import type { BubbleProps } from '$lib/components/chat/Bubble.svelte';
 import type { Message } from '$lib/models/chat';
 import { PUBLIC_FAUCET_ADDRESS } from '$env/static/public';
 import { CAPTCHA_SECRET } from '$env/static/private';
+import { getLatestChat } from '$lib/db';
 
 export interface FaucetDataResponse {
 	address: string;
@@ -35,8 +34,7 @@ export async function load({ url }: { url: URL }): Promise<FaucetDataResponse> {
 		throw error(400, 'Invalid captcha');
 	}
 
-	const chat = await db.collection('chats').findOne<Chat>({ address });
-	const dayInSecs = 60 * 60 * 24;
+	const chat = await getLatestChat(address);
 
 	if (!chat) {
 		return { address };
@@ -52,8 +50,6 @@ export async function load({ url }: { url: URL }): Promise<FaucetDataResponse> {
 				color: message.role === 'assistant' ? 'variant-soft-primary' : 'variant-soft-secondary'
 			}));
 		return { address, bubbles };
-	} else if (chat.finished && chat.lastUpdated.getTime() + dayInSecs * 1000 < Date.now()) {
-		return { address };
 	}
 
 	throw redirect(303, '/faucet/already-claimed');

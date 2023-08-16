@@ -1,7 +1,7 @@
 import type { ObjectId } from 'mongodb';
 
 export interface Chat {
-	id?: ObjectId;
+	_id?: ObjectId;
 	address: string;
 	lastUpdated: Date;
 	messages: Message[];
